@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 mongoose.set("strictQuery", true);
 
 // conexion
@@ -13,4 +13,4 @@ const db = () =>
          console.log("Error connecting to MongoDB", error);
       });
 
-module.exports = db;
+export default db;

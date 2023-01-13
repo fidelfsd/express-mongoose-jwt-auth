@@ -1,6 +1,6 @@
-const User = require("../models/User");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+import User from "../models/User.js";
+import { hashSync, compareSync } from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const AuthController = {};
 
@@ -18,7 +18,7 @@ AuthController.register = async (req, res) => {
          });
       }
 
-      const encryptedPassword = bcrypt.hashSync(password, 10);
+      const encryptedPassword = hashSync(password, 10);
 
       const newUser = {
          name: name,
@@ -57,7 +57,7 @@ AuthController.login = async (req, res) => {
 
       const user = await User.findOne({ email: email });
 
-      const isValidPassword = bcrypt.compareSync(password, user.password);
+      const isValidPassword = compareSync(password, user.password);
 
       if (!isValidPassword) {
          return res.status(401).json({
@@ -74,7 +74,8 @@ AuthController.login = async (req, res) => {
 
       return res.status(200).json({
          success: true,
-         message: `User Logged as ${user.role.toUpperCase()}`,
+         message: "User Logged",
+         role: user.role,
          token: token,
       });
    } catch (error) {
@@ -85,4 +86,4 @@ AuthController.login = async (req, res) => {
    }
 };
 
-module.exports = AuthController;
+export default AuthController;

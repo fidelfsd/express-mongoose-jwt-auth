@@ -1,9 +1,9 @@
-var express = require("express");
-var router = express.Router();
+import { Router } from "express";
+const router = Router();
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-   return res.send("Bienevenidos a mi aplicacion de tareas");
+   return res.send("Bienevenidos a mi aplicación de tareas");
 });
 
-module.exports = router;
+export default router;

@@ -1,4 +1,4 @@
-const jwt = require("jsonwebtoken");
+import jwt from "jsonwebtoken";
 
 const verifyToken = (req, res, next) => {
    try {
@@ -20,7 +20,13 @@ const verifyToken = (req, res, next) => {
       req.user_role = decoded.user_role;
 
       next();
-   } catch (error) {}
+   } catch (error) {
+      return res.status(500).json({
+         success: false,
+         message: "Invalid token",
+         error: error?.message || error,
+      });
+   }
 };
 
-module.exports = verifyToken;
+export default verifyToken;

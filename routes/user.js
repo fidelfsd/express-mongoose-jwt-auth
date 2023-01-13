@@ -1,11 +1,12 @@
-var express = require("express");
-var router = express.Router();
+import { Router } from "express";
+const router = Router();
 
-const UserController = require("../controllers/UserController");
-const isSuperAdmin = require("../middelwares/isSuperAdmin");
-const verifyToken = require("../middelwares/verifyToken");
+import UserController from "../controllers/UserController.js";
+import isSuperAdmin from "../middelwares/isSuperAdmin.js";
+import verifyToken from "../middelwares/verifyToken.js";
 
 /* GET users listing. */
 router.get("/", verifyToken, isSuperAdmin, UserController.getAll);
+//router.get("/", UserController.getAll);
 
-module.exports = router;
+export default router;

@@ -1,4 +1,4 @@
-const User = require("../models/User");
+import User from "../models/User.js";
 
 const UserController = {};
 
@@ -9,7 +9,7 @@ UserController.getAll = async (req, res) => {
       return res.status(200).json({
          success: true,
          message: "Get all users retrieved succsessfully",
-         data: users,
+         results: users,
       });
    } catch (error) {
       return res.status(500).json({
@@ -20,4 +20,4 @@ UserController.getAll = async (req, res) => {
    }
 };
 
-module.exports = UserController;
+export default UserController;
